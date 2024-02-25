@@ -1,7 +1,6 @@
 from django.db import models
 from django.utils import timezone
 from products.models import Products
-from users.models import User
 
 
 NULLABLE = {'blank': True, 'null': True}
@@ -14,8 +13,8 @@ class Unit(models.Model):
         ('E', 'Индивидуальный предприниматель')
     ]
     name = models.CharField(max_length=100, verbose_name="Название компании")
-    products = models.ManyToManyField(Products, verbose_name="Проукдты")
-    owner = models.ForeignKey(User,on_delete=models.CASCADE, verbose_name='Автор продукта', **NULLABLE)
+    product = models.ManyToManyField(Products, verbose_name="Продукт")
+    owner = models.ForeignKey('Unit', on_delete=models.PROTECT, verbose_name='Поставщик', **NULLABLE)
 
     email = models.EmailField(max_length=30, verbose_name="Электронная почта", default=None)
     country = models.CharField(max_length=50, verbose_name="Страна", default=None)
@@ -28,7 +27,7 @@ class Unit(models.Model):
     creations_date = models.DateTimeField(default=timezone.now, editable=False)
 
     def __str__(self):
-        return f'{self.name} {self.contacts} {self.arrears}'
+        return f'{self.owner} {self.name} {self.products} {self.level}'
 
     class Meta:
         verbose_name = 'Звено поставок'

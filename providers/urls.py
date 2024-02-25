@@ -1,4 +1,4 @@
-from sky.apps import SkyConfig
+from providers.apps import SkyConfig
 from django.db import router
 
 

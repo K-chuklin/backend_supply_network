@@ -40,8 +40,8 @@ class Migration(migrations.Migration):
                 ('shipper', models.CharField(choices=[('F', 'Завод'), ('R', 'Розничная сеть'), ('E', 'Индивидуальный предприниматель')], verbose_name='поставщик')),
                 ('arrears', models.DecimalField(decimal_places=2, max_digits=10, verbose_name='Задолженость')),
                 ('creations_date', models.DateTimeField(auto_now_add=True)),
-                ('contacts', models.ForeignKey(default=None, on_delete=django.db.models.deletion.CASCADE, to='sky.contacts', verbose_name='Контакты')),
-                ('products', models.ForeignKey(default=None, on_delete=django.db.models.deletion.CASCADE, to='sky.products', verbose_name='Проукдты')),
+                ('contacts', models.ForeignKey(default=None, on_delete=django.db.models.deletion.CASCADE, to='providers.contacts', verbose_name='Контакты')),
+                ('products', models.ForeignKey(default=None, on_delete=django.db.models.deletion.CASCADE, to='providers.products', verbose_name='Проукдты')),
             ],
         ),
     ]

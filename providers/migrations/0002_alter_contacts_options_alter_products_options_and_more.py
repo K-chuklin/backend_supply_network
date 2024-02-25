@@ -6,7 +6,7 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('sky', '0001_initial'),
+        ('providers', '0001_initial'),
     ]
 
     operations = [

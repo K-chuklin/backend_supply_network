@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from products.models import Products
-
+from users.models import User
 
 NULLABLE = {'blank': True, 'null': True}
 
@@ -14,7 +14,8 @@ class Unit(models.Model):
     ]
     name = models.CharField(max_length=100, verbose_name="Название компании")
     product = models.ManyToManyField(Products, verbose_name="Продукт")
-    owner = models.ForeignKey('Unit', on_delete=models.PROTECT, verbose_name='Поставщик', **NULLABLE)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='поставщик владелец', **NULLABLE)
+    supply = models.ForeignKey('Unit', on_delete=models.PROTECT, verbose_name='Поставщик', **NULLABLE)
 
     email = models.EmailField(max_length=30, verbose_name="Электронная почта", default=None)
     country = models.CharField(max_length=50, verbose_name="Страна", default=None)

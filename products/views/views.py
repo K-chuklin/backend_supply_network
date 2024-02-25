@@ -1,19 +1,15 @@
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from django.shortcuts import get_object_or_404
+from products.models import Products
 from users.models import User
-from providers.models import Unit
 from products.permissions import IsAdmin, IsOwner
-from providers.serializers.serializers import ProviderSerializer
-from providers.filters import UnitFilter
-from django_filters.rest_framework import DjangoFilterBackend
+from products.serializers.serializers import ProductSerializer
 
 
-class ProviderViewSet(viewsets.ModelViewSet):
-    queryset = Unit.objects.all()
-    serializer_class = ProviderSerializer
-    filter_backends = [DjangoFilterBackend]
-    filterset_class = UnitFilter
+class ProductViewSet(viewsets.ModelViewSet):
+    queryset = Products.objects.all()
+    serializer_class = ProductSerializer
 
     def get_permissions(self):
         if self.action == 'retrieve':
@@ -27,6 +23,6 @@ class ProviderViewSet(viewsets.ModelViewSet):
         return [permission() for permission in permission_classes]
 
     def perform_create(self, serializer):
-        supplier = serializer.save()
-        supplier.author = get_object_or_404(User, id=self.request.user.id)
-        supplier.save()
+        product = serializer.save()
+        product.owner = get_object_or_404(User, id=self.request.user.id)
+        product.save()

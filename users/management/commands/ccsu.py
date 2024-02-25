@@ -10,9 +10,8 @@ class Command(BaseCommand):
             email='admin@admin.pro',
             first_name='Admin',
             last_name='Admin',
-            is_superuser=True,
-            is_staff=True,
-            is_active=True
+            is_active=True,
+            role='admin'
         )
 
         user.set_password(os.getenv('CSU_PASSWORD'))

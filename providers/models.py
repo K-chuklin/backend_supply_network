@@ -27,7 +27,7 @@ class Unit(models.Model):
     creations_date = models.DateTimeField(default=timezone.now, editable=False)
 
     def __str__(self):
-        return f'{self.owner} {self.name} {self.products} {self.level}'
+        return f'{self.owner} {self.name} {self.product} {self.level}'
 
     class Meta:
         verbose_name = 'Звено поставок'
